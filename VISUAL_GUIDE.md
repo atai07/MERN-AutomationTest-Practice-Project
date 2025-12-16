@@ -1,0 +1,544 @@
+# 🗺️ MyEvents Platform - Visual Guide
+
+## 📱 Application Flow
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                        🌐 BROWSER                                │
+│                   http://localhost:3000                          │
+└────────────────────────┬────────────────────────────────────────┘
+                         │
+        ┌────────────────┴────────────────┐
+        │                                  │
+    Not Logged In                    Logged In
+        │                                  │
+        ▼                                  ▼
+┌──────────────────┐            ┌────────────────────┐
+│  🏠 Home Page    │            │  🏠 Home Page       │
+│                  │            │  + Notifications    │
+│  • View public   │            │  + Create buttons   │
+│    events        │            │  + Profile menu     │
+│  • View public   │            │                     │
+│    jobs          │            │  Can see:           │
+│  • View public   │            │  • All events       │
+│    blogs         │            │  • All jobs         │
+│  • Register btn  │            │  • All blogs        │
+└──────────────────┘            └────────────────────┘
+        │                                  │
+        └────────────┬─────────────────────┘
+                     │
+        ┌────────────┴──────────────┐
+        │                           │
+        ▼                           ▼
+┌─────────────┐            ┌─────────────────┐
+│  📅 Events  │            │  💼 Jobs        │
+├─────────────┤            ├─────────────────┤
+│             │            │                 │
+│ • List      │            │ • List          │
+│   (2 cols,  │            │   (2 cols,      │
+│   12/page)  │            │   12/page)      │
+│             │            │                 │
+│ • Details   │            │ • Details       │
+│   - Info    │            │   - Info        │
+│   - Regist. │            │   - Apply       │
+│   - Payment │            │                 │
+│             │            │                 │
+│ • Create    │            │ • Create        │
+│   (login)   │            │   (login)       │
+│             │            │                 │
+└─────────────┘            └─────────────────┘
+                                    │
+                                    │
+                           ┌────────▼────────┐
+                           │  📝 Blogs       │
+                           ├─────────────────┤
+                           │                 │
+                           │ • List          │
+                           │   (2 cols,      │
+                           │   12/page)      │
+                           │                 │
+                           │ • Details       │
+                           │   - Content     │
+                           │   - Like ❤️     │
+                           │                 │
+                           │ • Create        │
+                           │   (login)       │
+                           │                 │
+                           └─────────────────┘
+```
+
+---
+
+## 🎨 Page Layouts
+
+### Home Page Layout
+```
+┌─────────────────────────────────────────────────────────────┐
+│  🔍 Search    📅 Events  💼 Jobs  📝 Blogs    🔔  👤 John ▼ │  ← Nav Bar
+├──────────┬──────────────────────────────┬───────────────────┤
+│          │                              │                   │
+│ 📌 Quick │     📰 FEED / CENTER        │  📢 SIDEBAR       │
+│  Links   │                              │                   │
+│          │  ┌────────────────────────┐  │  Upcoming Events  │
+│ Events   │  │ 📝 Blog Post 1         │  │  ┌─────────────┐ │
+│ Jobs     │  │ "How to..."            │  │  │ Event 1     │ │
+│ Blogs    │  │ By John • 2 days ago   │  │  │ Dec 10      │ │
+│          │  └────────────────────────┘  │  └─────────────┘ │
+│          │                              │                   │
+│          │  ┌────────────────────────┐  │  ┌─────────────┐ │
+│          │  │ 📝 Blog Post 2         │  │  │ Event 2     │ │
+│          │  │ "Introduction to..."   │  │  │ Dec 15      │ │
+│          │  │ By Jane • 3 days ago   │  │  └─────────────┘ │
+│          │  └────────────────────────┘  │                   │
+│          │                              │  New Jobs         │
+│          │  ┌────────────────────────┐  │  ┌─────────────┐ │
+│          │  │ 📝 Blog Post 3         │  │  │ Job 1       │ │
+│          │  │ "Best practices..."    │  │  │ Company A   │ │
+│          │  │ By Mike • 5 days ago   │  │  └─────────────┘ │
+│          │  └────────────────────────┘  │                   │
+│          │                              │  ┌─────────────┐ │
+│          │                              │  │ Job 2       │ │
+│          │                              │  │ Company B   │ │
+│          │                              │  └─────────────┘ │
+└──────────┴──────────────────────────────┴───────────────────┘
+```
+
+### Events List Page
+```
+┌────────────────────────────────────────────────────────────────┐
+│  🔍 Search    📅 Events  💼 Jobs  📝 Blogs    🔔  👤 John ▼    │
+├────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  📅 Events                         [+ Create New Event] ← Login│
+│                                                                 │
+│  ┌────────────────────┐  ┌────────────────────┐               │
+│  │ 📸                 │  │ 📸                 │               │
+│  │                    │  │                    │               │
+│  │ Community Meetup   │  │ Tech Conference    │               │
+│  │ Dec 10, 2025       │  │ Dec 15, 2025       │               │
+│  │ Location: Hall A   │  │ Location: Center   │               │
+│  │ Price: Free        │  │ Price: $50         │               │
+│  │ [View Details]     │  │ [View Details]     │               │
+│  └────────────────────┘  └────────────────────┘               │
+│                                                                 │
+│  ┌────────────────────┐  ┌────────────────────┐               │
+│  │ 📸                 │  │ 📸                 │               │
+│  │                    │  │                    │               │
+│  │ Workshop: React    │  │ Networking Event   │               │
+│  │ Dec 20, 2025       │  │ Dec 25, 2025       │               │
+│  │ Location: Room 5   │  │ Location: Venue B  │               │
+│  │ Price: $25         │  │ Price: Free        │               │
+│  │ [View Details]     │  │ [View Details]     │               │
+│  └────────────────────┘  └────────────────────┘               │
+│                                                                 │
+│             [1] [2] [3] ... [Next]  ← Pagination                │
+│                                                                 │
+└────────────────────────────────────────────────────────────────┘
+```
+
+### Event Details Page
+```
+┌────────────────────────────────────────────────────────────────┐
+│  🔍 Search    📅 Events  💼 Jobs  📝 Blogs    🔔  👤 John ▼    │
+├────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ┌──────────────────────────────────────────────────────────┐  │
+│  │                 📸 EVENT COVER IMAGE                      │  │
+│  │                                                           │  │
+│  └──────────────────────────────────────────────────────────┘  │
+│                                                                 │
+│  📅 Community Meetup                                           │
+│                                                                 │
+│  📅 Date & Time: December 10, 2025 at 6:00 PM                 │
+│  ⏱️  Duration: 2 hours                                          │
+│  📍 Location: Community Hall A, Main Street                    │
+│  💰 Price: Free                                                │
+│                                                                 │
+│  📝 Description:                                               │
+│  Join us for an evening of networking and learning.            │
+│  Great opportunity to connect with local professionals.        │
+│                                                                 │
+│  ─────────────────────────────────────────────────────────────│
+│                                                                 │
+│  📝 Registration Form                                          │
+│                                                                 │
+│  First Name: [John        ] (pre-filled if logged in)          │
+│  Last Name:  [Doe         ]                                    │
+│  Organization: [Tech Co   ]                                    │
+│  Profession: [Developer   ]                                    │
+│  Email:      [john@ex.com ]                                    │
+│  Phone:      [555-1234    ]                                    │
+│                                                                 │
+│  Social Media (optional): [linkedin.com/john]                  │
+│  Questions (optional):    [                ]                   │
+│                                                                 │
+│  [✓ Confirm Registration]  ← Button disables after click       │
+│                                                                 │
+│  If paid: Stripe payment appears before thank you page         │
+│  If free: Direct to thank you page                             │
+│                                                                 │
+└────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 🔐 Authentication Flow
+
+```
+New User                           Existing User
+   │                                     │
+   ▼                                     ▼
+┌──────────┐                      ┌──────────┐
+│ Register │                      │  Login   │
+└────┬─────┘                      └────┬─────┘
+     │                                  │
+     │ Fill form:                       │ Enter:
+     │ • First name                     │ • Email
+     │ • Last name                      │ • Password
+     │ • Email                          │
+     │ • Password                       │
+     │ • Confirm password               │
+     │ • Organization (opt)             │
+     │ • Profession (opt)               │
+     │ • Phone (opt)                    │
+     │                                  │
+     ▼                                  ▼
+┌────────────────┐              ┌────────────────┐
+│ Submit         │              │ Submit         │
+└────┬───────────┘              └────┬───────────┘
+     │                               │
+     ▼                               ▼
+┌────────────────────────────────────────┐
+│   Backend validates credentials        │
+│   • Check if user exists               │
+│   • Hash password (register)           │
+│   • Compare password (login)           │
+│   • Generate JWT token                 │
+└────┬───────────────────────────────────┘
+     │
+     ▼
+┌────────────────────────────────────────┐
+│   Token stored in localStorage         │
+│   User redirected to home page         │
+│   User data stored in context          │
+└────┬───────────────────────────────────┘
+     │
+     ▼
+┌────────────────────────────────────────┐
+│   All API requests include token       │
+│   in Authorization header              │
+└────────────────────────────────────────┘
+
+Forgot Password?
+     │
+     ▼
+┌──────────────────┐
+│ Enter email      │
+└────┬─────────────┘
+     │
+     ▼
+┌──────────────────┐
+│ Receive email    │
+│ with reset link  │
+└────┬─────────────┘
+     │
+     ▼
+┌──────────────────┐
+│ Click link       │
+│ Enter new pass   │
+└────┬─────────────┘
+     │
+     ▼
+┌──────────────────┐
+│ Password updated │
+│ Can login now    │
+└──────────────────┘
+```
+
+---
+
+## 💳 Payment Flow (Stripe)
+
+```
+User registers for paid event ($50)
+           │
+           ▼
+┌──────────────────────┐
+│ Fill registration    │
+│ form                 │
+└──────┬───────────────┘
+       │
+       ▼
+┌──────────────────────┐
+│ Submit form          │
+└──────┬───────────────┘
+       │
+       ▼
+┌──────────────────────────────────┐
+│ Backend creates payment intent   │
+│ Returns client secret            │
+└──────┬───────────────────────────┘
+       │
+       ▼
+┌──────────────────────────────────┐
+│ Stripe payment form appears      │
+│                                  │
+│ Card Number: 4242 4242 4242 4242│
+│ Expiry: 12/25                    │
+│ CVC: 123                         │
+│ ZIP: 12345                       │
+│                                  │
+│ [Pay $50]                        │
+└──────┬───────────────────────────┘
+       │
+       ▼
+┌──────────────────────────────────┐
+│ Stripe processes payment         │
+└──────┬───────────────────────────┘
+       │
+    Success?
+       │
+    ┌──┴──┐
+   Yes   No
+    │     │
+    │     └──> Show error message
+    │          User can retry
+    ▼
+┌──────────────────────────────────┐
+│ Backend confirms payment         │
+│ Updates registration status      │
+└──────┬───────────────────────────┘
+       │
+       ▼
+┌──────────────────────────────────┐
+│ ✓ Thank You Page                 │
+│ "Registration Successful!"       │
+│ Button becomes disabled          │
+└──────────────────────────────────┘
+```
+
+---
+
+## 🔔 Notification System
+
+```
+User A creates new event
+           │
+           ▼
+┌──────────────────────────────────┐
+│ Backend saves event to database  │
+└──────┬───────────────────────────┘
+       │
+       ▼
+┌──────────────────────────────────┐
+│ Get all other users from DB      │
+│ (exclude User A)                 │
+└──────┬───────────────────────────┘
+       │
+       ▼
+┌──────────────────────────────────┐
+│ Create notification for each:    │
+│                                  │
+│ {                                │
+│   user: userId,                  │
+│   type: 'event',                 │
+│   title: 'New Event Posted',     │
+│   message: 'John posted...',     │
+│   link: '/events/123',           │
+│   isRead: false                  │
+│ }                                │
+└──────┬───────────────────────────┘
+       │
+       ▼
+┌──────────────────────────────────┐
+│ Save all notifications to DB     │
+└──────┬───────────────────────────┘
+       │
+       ▼
+When User B logs in:
+┌──────────────────────────────────┐
+│ Fetch unread notifications       │
+│ Show count on bell icon: 🔔 3    │
+└──────┬───────────────────────────┘
+       │
+       ▼
+User clicks bell:
+┌──────────────────────────────────┐
+│ Show notification panel          │
+│                                  │
+│ • New Event Posted               │
+│   John posted Community Meetup   │
+│                                  │
+│ • New Job Posted                 │
+│   Jane posted Developer Role     │
+│                                  │
+│ • New Blog Posted                │
+│   Mike published React Guide     │
+│                                  │
+│ [Mark all as read]               │
+└──────────────────────────────────┘
+```
+
+---
+
+## 🗄️ Database Collections
+
+```
+┌─────────────────────────────────────────────────┐
+│                    MONGODB                       │
+│                                                  │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐      │
+│  │  users   │  │  events  │  │   jobs   │      │
+│  ├──────────┤  ├──────────┤  ├──────────┤      │
+│  │ _id      │  │ _id      │  │ _id      │      │
+│  │ email    │  │ title    │  │ title    │      │
+│  │ password │  │ date     │  │ company  │      │
+│  │ firstName│  │ location │  │ location │      │
+│  │ lastName │  │ price    │  │ jobType  │      │
+│  │ phone    │  │ isPublic │  │ isPublic │      │
+│  │ ...      │  │ createdBy├─>│ createdBy├─┐    │
+│  └──────────┘  └──────────┘  └──────────┘ │    │
+│       ▲              │                     │    │
+│       │              │                     │    │
+│       │        ┌─────▼───────┐      ┌─────▼────▼┐
+│       │        │   event     │      │    job    │
+│       │        │registrations│      │applications│
+│       │        ├─────────────┤      ├───────────┤
+│       │        │ _id         │      │ _id       │
+│       │        │ event       │      │ job       │
+│       │        │ user        │      │ user      │
+│       │        │ firstName   │      │ firstName │
+│       │        │ email       │      │ email     │
+│       │        │ paymentStatus│     │ resumeUrl │
+│       │        └─────────────┘      └───────────┘
+│       │
+│       │        ┌──────────┐   ┌──────────────┐  ┌──────────┐
+│       │        │  blogs   │   │notifications │  │ comments │
+│       │        ├──────────┤   ├──────────────┤  ├──────────┤
+│       │        │ _id      │   │ _id          │  │ _id      │
+│       │        │ title    │   │ user    ─────┼──┤ blog     │
+│       │        │ content  │   │ type         │  │ user     │
+│       │        │ isPublic │   │ title        │  │ content  │
+│       └────────┤ createdBy│   │ message      │  │ createdAt│
+│                │ likes[]  │   │ link         │  └──────────┘
+│                └──────────┘   │ isRead       │
+│                               └──────────────┘
+│
+└─────────────────────────────────────────────────┘
+```
+
+---
+
+## 🚀 Deployment Architecture
+
+```
+Development (Local)
+┌──────────────────────────────────────────────┐
+│                                              │
+│  Frontend: localhost:3000                    │
+│  Backend:  localhost:5000                    │
+│  MongoDB:  localhost:27017                   │
+│                                              │
+└──────────────────────────────────────────────┘
+
+Production
+┌──────────────────────────────────────────────┐
+│                                              │
+│  Frontend: Vercel/Netlify                    │
+│            https://myevents.vercel.app       │
+│                                              │
+│  Backend:  Heroku/Railway                    │
+│            https://myevents-api.herokuapp.com│
+│                                              │
+│  MongoDB:  MongoDB Atlas                     │
+│            Cloud hosted database             │
+│                                              │
+│  Stripe:   Production keys                   │
+│  Email:    Production SMTP                   │
+│                                              │
+└──────────────────────────────────────────────┘
+```
+
+---
+
+## 📊 Feature Status
+
+```
+✅ = Fully Implemented
+🔨 = Can be extended
+💡 = Future enhancement
+
+Authentication:
+✅ Register
+✅ Login
+✅ Logout
+✅ Forgot Password
+✅ Reset Password
+✅ JWT Token
+✅ Protected Routes
+
+Events:
+✅ Create Event
+✅ List Events
+✅ View Event
+✅ Edit Event
+✅ Delete Event
+✅ Register for Event
+✅ Payment Integration
+✅ Public/Private
+✅ Pagination
+
+Jobs:
+✅ Post Job
+✅ List Jobs
+✅ View Job
+✅ Edit Job
+✅ Delete Job
+✅ Apply for Job
+✅ Public/Private
+✅ Pagination
+
+Blogs:
+✅ Create Blog
+✅ List Blogs
+✅ View Blog
+✅ Edit Blog
+✅ Delete Blog
+✅ Like Blog
+✅ Public/Private
+✅ Pagination
+💡 Comments (model ready)
+
+Notifications:
+✅ Create Notifications
+✅ View Notifications
+✅ Mark as Read
+✅ Notification Bell
+✅ Unread Count
+
+UI/UX:
+✅ Responsive Design
+✅ Material-UI Components
+✅ Facebook-style Layout
+✅ Search Bar
+✅ Navigation
+✅ Sidebar
+✅ Cards
+
+Future Enhancements:
+💡 Comments Implementation (model exists)
+💡 Image Upload (Cloudinary integration)
+💡 Advanced Search Filters
+💡 User Profiles (extended)
+💡 Chat/Messaging System
+💡 Mobile App
+💡 Analytics Dashboard
+💡 Admin Panel
+💡 Social Sharing
+💡 Email Notifications for events
+💡 Calendar Integration
+```
+
+---
+
+**This visual guide helps you understand the complete structure and flow of the MyEvents Platform!**
