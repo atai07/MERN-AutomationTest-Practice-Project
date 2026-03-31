@@ -106,7 +106,6 @@ const ForgotPassword: React.FC = () => {
               value={email}
               onChange={handleEmailChange}
               margin="normal"
-              required
               error={!!emailError}
               helperText={emailError}
               placeholder="Enter your email address"

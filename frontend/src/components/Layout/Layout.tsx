@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
@@ -69,6 +69,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const Layout: React.FC = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [notificationAnchor, setNotificationAnchor] = useState<null | HTMLElement>(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -182,6 +183,7 @@ const Layout: React.FC = () => {
               <IconButton
                 onClick={handleMenu}
                 sx={{ ml: 1 }}
+                data-testid="profileImgIcon"
               >
                 <Avatar
                   src={getProfileImageUrl(user.profileImage)}
@@ -210,9 +212,11 @@ const Layout: React.FC = () => {
               />
             </>
           ) : (
-            <Button color="inherit" onClick={() => navigate('/login')}>
-              Login
-            </Button>
+            location.pathname !== '/login' && (
+              <Button color="inherit" onClick={() => navigate('/login')}>
+                Login
+              </Button>
+            )
           )}
         </Toolbar>
       </AppBar>

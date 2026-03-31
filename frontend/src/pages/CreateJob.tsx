@@ -215,7 +215,6 @@ const CreateJob: React.FC = () => {
                 name="title"
                 value={formData.title}
                 onChange={handleChange}
-                required
                 placeholder="e.g., Senior Software Engineer"
               />
             </Grid>
@@ -228,7 +227,6 @@ const CreateJob: React.FC = () => {
                 name="company"
                 value={formData.company}
                 onChange={handleChange}
-                required
                 placeholder="e.g., Tech Corp Inc."
               />
             </Grid>
@@ -241,7 +239,6 @@ const CreateJob: React.FC = () => {
                 name="location"
                 value={formData.location}
                 onChange={handleChange}
-                required
                 placeholder="e.g., San Francisco, CA or Remote"
               />
             </Grid>
@@ -255,7 +252,6 @@ const CreateJob: React.FC = () => {
                 name="jobType"
                 value={formData.jobType}
                 onChange={handleChange}
-                required
               >
                 {jobTypes.map((type) => (
                   <MenuItem key={type} value={type}>
@@ -331,7 +327,6 @@ const CreateJob: React.FC = () => {
                 onChange={handleChange}
                 multiline
                 rows={10}
-                required
                 placeholder="Provide a detailed description of the job, responsibilities, requirements, qualifications, etc."
               />
             </Grid>

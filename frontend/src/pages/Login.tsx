@@ -23,6 +23,7 @@ const Login: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [passwordError, setPasswordError] = useState('');
+  const [emailError, setEmailError] = useState('');
 
   // Email validation
   const validateEmail = (email: string): boolean => {
@@ -54,8 +55,19 @@ const Login: React.FC = () => {
     setFormData({ ...formData, [name]: filteredValue });
     
     // Clear errors when user types
+    if (name === 'email') {
+      setEmailError('');
+    }
     if (name === 'password') {
       setPasswordError('');
+    }
+  };
+
+  const handleEmailBlur = () => {
+    const trimmedEmail = formData.email.trim();
+    // Only validate if user has entered something
+    if (trimmedEmail && !validateEmail(trimmedEmail)) {
+      setEmailError('Invalid email.');
     }
   };
 
@@ -63,6 +75,7 @@ const Login: React.FC = () => {
     e.preventDefault();
     setError('');
     setPasswordError('');
+    setEmailError('');
     setLoading(true);
 
     // Trim fields
@@ -71,6 +84,12 @@ const Login: React.FC = () => {
 
     // Test 5: Validate empty fields on frontend
     if (!trimmedEmail || !trimmedPassword) {
+      if (!trimmedEmail) {
+        setEmailError('Email is required');
+      }
+      if (!trimmedPassword) {
+        setPasswordError('Password is required');
+      }
       setError('Please provide email and password');
       setLoading(false);
       return;
@@ -78,7 +97,8 @@ const Login: React.FC = () => {
 
     // Validate email format
     if (!validateEmail(trimmedEmail)) {
-      setError('Please enter a valid email address');
+      setEmailError('Invalid email.');
+      setError('Invalid email.');
       setLoading(false);
       return;
     }
@@ -122,11 +142,13 @@ const Login: React.FC = () => {
               fullWidth
               label="Email"
               name="email"
-              type="email"
+              type="text"
               value={formData.email}
               onChange={handleChange}
+              onBlur={handleEmailBlur}
               margin="normal"
-              required
+              error={!!emailError}
+              helperText={emailError}
             />
             <TextField
               fullWidth
@@ -136,9 +158,8 @@ const Login: React.FC = () => {
               value={formData.password}
               onChange={handleChange}
               margin="normal"
-              required
               error={!!passwordError}
-              helperText={passwordError || "Your password must be at least 8 characters long and include a mix of letters, numbers, and special characters."}
+              helperText={passwordError}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">

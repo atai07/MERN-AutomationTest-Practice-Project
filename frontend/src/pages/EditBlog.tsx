@@ -246,7 +246,6 @@ const EditBlog: React.FC = () => {
             name="title"
             value={formData.title}
             onChange={handleChange}
-            required
             margin="normal"
             placeholder="Enter an engaging title for your blog"
             disabled={loading}
@@ -328,7 +327,6 @@ const EditBlog: React.FC = () => {
             name="excerpt"
             value={formData.excerpt}
             onChange={handleChange}
-            required
             margin="normal"
             multiline
             rows={2}
@@ -344,7 +342,6 @@ const EditBlog: React.FC = () => {
             name="content"
             value={formData.content}
             onChange={handleChange}
-            required
             margin="normal"
             multiline
             rows={12}

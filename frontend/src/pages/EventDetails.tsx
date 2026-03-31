@@ -321,7 +321,6 @@ const EventDetails: React.FC = () => {
                       name="firstName"
                       value={formData.firstName}
                       onChange={handleChange}
-                      required
                       placeholder="Atai"
                       InputProps={{
                         readOnly: !!user,
@@ -339,7 +338,6 @@ const EventDetails: React.FC = () => {
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleChange}
-                      required
                       placeholder="Bhuiyan"
                       InputProps={{
                         readOnly: !!user,
@@ -358,7 +356,6 @@ const EventDetails: React.FC = () => {
                       type="email"
                       value={formData.email}
                       onChange={handleChange}
-                      required
                       placeholder="atai.rabbi+sa@gmail.com"
                       InputProps={{
                         readOnly: !!user,
@@ -376,7 +373,6 @@ const EventDetails: React.FC = () => {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      required
                       placeholder="+1"
                       InputProps={{
                         readOnly: !!user,

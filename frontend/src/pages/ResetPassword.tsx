@@ -64,6 +64,19 @@ const ResetPassword: React.FC = () => {
     setConfirmPasswordError('');
     setLoading(true);
 
+    // Validate empty fields
+    if (!formData.password || !formData.confirmPassword) {
+      if (!formData.password) {
+        setPasswordError('Password is required');
+      }
+      if (!formData.confirmPassword) {
+        setConfirmPasswordError('Confirm password is required');
+      }
+      setError('Please fill in all fields');
+      setLoading(false);
+      return;
+    }
+
     // Validate password format
     if (!validatePassword(formData.password)) {
       setPasswordError('Password must be at least 8 characters long and include letters, numbers, and special characters');
@@ -132,9 +145,8 @@ const ResetPassword: React.FC = () => {
               value={formData.password}
               onChange={handleChange}
               margin="normal"
-              required
               error={!!passwordError}
-              helperText={passwordError || "Your password must be at least 8 characters long and include a mix of letters, numbers, and special characters."}
+              helperText={passwordError}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -159,9 +171,8 @@ const ResetPassword: React.FC = () => {
               value={formData.confirmPassword}
               onChange={handleChange}
               margin="normal"
-              required
               error={!!confirmPasswordError}
-              helperText={confirmPasswordError || "Re-enter your password to confirm."}
+              helperText={confirmPasswordError}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">

@@ -36,6 +36,9 @@ const Register: React.FC = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordError, setPasswordError] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
+  const [firstNameError, setFirstNameError] = useState('');
+  const [lastNameError, setLastNameError] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [toast, setToast] = useState({ open: false, message: '', severity: 'success' as 'success' | 'error' });
 
   // Toast close handler
@@ -90,6 +93,15 @@ const Register: React.FC = () => {
     setFormData({ ...formData, [name]: filteredValue });
     
     // Clear errors when user types
+    if (name === 'firstName') {
+      setFirstNameError('');
+    }
+    if (name === 'lastName') {
+      setLastNameError('');
+    }
+    if (name === 'email') {
+      setEmailError('');
+    }
     if (name === 'password') {
       setPasswordError('');
     }
@@ -103,6 +115,9 @@ const Register: React.FC = () => {
     setError('');
     setPasswordError('');
     setConfirmPasswordError('');
+    setFirstNameError('');
+    setLastNameError('');
+    setEmailError('');
 
     // Trim all text fields
     const trimmedData = {
@@ -118,18 +133,21 @@ const Register: React.FC = () => {
 
     // Validate first name
     if (!trimmedData.firstName || !validateName(trimmedData.firstName)) {
+      setFirstNameError(!trimmedData.firstName ? 'First name is required' : 'First name must contain only English letters, apostrophes, and periods');
       setError('First name must contain only English letters, apostrophes, and periods');
       return;
     }
 
     // Validate last name
     if (!trimmedData.lastName || !validateName(trimmedData.lastName)) {
+      setLastNameError(!trimmedData.lastName ? 'Last name is required' : 'Last name must contain only English letters, apostrophes, and periods');
       setError('Last name must contain only English letters, apostrophes, and periods');
       return;
     }
 
     // Validate email
     if (!trimmedData.email || !validateEmail(trimmedData.email)) {
+      setEmailError(!trimmedData.email ? 'Email is required' : 'Please enter a valid email address');
       setError('Please enter a valid email address');
       return;
     }
@@ -241,7 +259,8 @@ const Register: React.FC = () => {
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleChange}
-                  required
+                  error={!!firstNameError}
+                  helperText={firstNameError}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -251,7 +270,8 @@ const Register: React.FC = () => {
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleChange}
-                  required
+                  error={!!lastNameError}
+                  helperText={lastNameError}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -262,7 +282,8 @@ const Register: React.FC = () => {
                   type="email"
                   value={formData.email}
                   onChange={handleChange}
-                  required
+                  error={!!emailError}
+                  helperText={emailError}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -273,9 +294,8 @@ const Register: React.FC = () => {
                   type={showPassword ? 'text' : 'password'}
                   value={formData.password}
                   onChange={handleChange}
-                  required
                   error={!!passwordError}
-                  helperText={passwordError || "Your password must be at least 8 characters long and include a mix of letters, numbers, and special characters."}
+                  helperText={passwordError}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
@@ -300,9 +320,8 @@ const Register: React.FC = () => {
                   type={showConfirmPassword ? 'text' : 'password'}
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  required
                   error={!!confirmPasswordError}
-                  helperText={confirmPasswordError || "Re-enter your password to confirm."}
+                  helperText={confirmPasswordError}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">

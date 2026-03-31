@@ -25,6 +25,9 @@ const Profile: React.FC = () => {
   const [success, setSuccess] = useState('');
   const [profileImage, setProfileImage] = useState<string>('');
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [firstNameError, setFirstNameError] = useState('');
+  const [lastNameError, setLastNameError] = useState('');
+  const [emailError, setEmailError] = useState('');
   
   const [formData, setFormData] = useState({
     firstName: '',
@@ -51,7 +54,19 @@ const Profile: React.FC = () => {
   }, [user]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    
+    // Clear errors when user types
+    if (name === 'firstName') {
+      setFirstNameError('');
+    }
+    if (name === 'lastName') {
+      setLastNameError('');
+    }
+    if (name === 'email') {
+      setEmailError('');
+    }
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,7 +85,41 @@ const Profile: React.FC = () => {
     e.preventDefault();
     setError('');
     setSuccess('');
+    setFirstNameError('');
+    setLastNameError('');
+    setEmailError('');
     setLoading(true);
+
+    // Validate required fields
+    if (!formData.firstName.trim()) {
+      setFirstNameError('First name is required');
+      setError('Please fill in all required fields');
+      setLoading(false);
+      return;
+    }
+
+    if (!formData.lastName.trim()) {
+      setLastNameError('Last name is required');
+      setError('Please fill in all required fields');
+      setLoading(false);
+      return;
+    }
+
+    if (!formData.email.trim()) {
+      setEmailError('Email is required');
+      setError('Please fill in all required fields');
+      setLoading(false);
+      return;
+    }
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setEmailError('Please enter a valid email address');
+      setError('Please enter a valid email address');
+      setLoading(false);
+      return;
+    }
 
     try {
       // Create FormData to handle both text and file data
@@ -125,6 +174,9 @@ const Profile: React.FC = () => {
     setEditMode(false);
     setError('');
     setSuccess('');
+    setFirstNameError('');
+    setLastNameError('');
+    setEmailError('');
   };
 
   if (!user) {
@@ -218,7 +270,8 @@ const Profile: React.FC = () => {
                   value={formData.firstName}
                   onChange={handleChange}
                   disabled={!editMode}
-                  required
+                  error={!!firstNameError}
+                  helperText={firstNameError}
                 />
               </Grid>
 
@@ -230,7 +283,8 @@ const Profile: React.FC = () => {
                   value={formData.lastName}
                   onChange={handleChange}
                   disabled={!editMode}
-                  required
+                  error={!!lastNameError}
+                  helperText={lastNameError}
                 />
               </Grid>
 
@@ -244,7 +298,8 @@ const Profile: React.FC = () => {
                   value={formData.email}
                   onChange={handleChange}
                   disabled={!editMode}
-                  required
+                  error={!!emailError}
+                  helperText={emailError}
                 />
               </Grid>
 

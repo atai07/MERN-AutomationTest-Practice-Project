@@ -319,7 +319,6 @@ const EditEvent: React.FC = () => {
                   name="title"
                   value={formData.title}
                   onChange={handleChange}
-                  required
                 />
               </Grid>
 
@@ -389,7 +388,7 @@ const EditEvent: React.FC = () => {
                       label="Date"
                       value={formData.singleDate}
                       onChange={(newValue) => setFormData({ ...formData, singleDate: newValue })}
-                      slotProps={{ textField: { fullWidth: true, required: true } }}
+                      slotProps={{ textField: { fullWidth: true } }}
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
@@ -397,7 +396,7 @@ const EditEvent: React.FC = () => {
                       label="Time"
                       value={formData.singleTime}
                       onChange={(newValue) => setFormData({ ...formData, singleTime: newValue })}
-                      slotProps={{ textField: { fullWidth: true, required: true } }}
+                      slotProps={{ textField: { fullWidth: true } }}
                     />
                   </Grid>
                 </>
@@ -411,7 +410,7 @@ const EditEvent: React.FC = () => {
                       label="Start Date"
                       value={formData.startDate}
                       onChange={(newValue) => setFormData({ ...formData, startDate: newValue })}
-                      slotProps={{ textField: { fullWidth: true, required: true } }}
+                      slotProps={{ textField: { fullWidth: true } }}
                     />
                   </Grid>
                   <Grid item xs={12} sm={4}>
@@ -419,7 +418,7 @@ const EditEvent: React.FC = () => {
                       label="End Date"
                       value={formData.endDate}
                       onChange={(newValue) => setFormData({ ...formData, endDate: newValue })}
-                      slotProps={{ textField: { fullWidth: true, required: true } }}
+                      slotProps={{ textField: { fullWidth: true } }}
                     />
                   </Grid>
                   <Grid item xs={12} sm={4}>
@@ -427,7 +426,7 @@ const EditEvent: React.FC = () => {
                       label="Time"
                       value={formData.multipleTime}
                       onChange={(newValue) => setFormData({ ...formData, multipleTime: newValue })}
-                      slotProps={{ textField: { fullWidth: true, required: true } }}
+                      slotProps={{ textField: { fullWidth: true } }}
                     />
                   </Grid>
                 </>
@@ -442,7 +441,6 @@ const EditEvent: React.FC = () => {
                   value={formData.duration}
                   onChange={handleChange}
                   placeholder="e.g., 2 hours, 3 days"
-                  required
                 />
               </Grid>
 
@@ -471,7 +469,6 @@ const EditEvent: React.FC = () => {
                     name="location"
                     value={formData.location}
                     onChange={handleChange}
-                    required
                   />
                 </Grid>
               )}
@@ -500,7 +497,6 @@ const EditEvent: React.FC = () => {
                     value={formData.eventFee}
                     onChange={handleChange}
                     placeholder="e.g., 50"
-                    required
                   />
                 </Grid>
               )}
@@ -515,7 +511,6 @@ const EditEvent: React.FC = () => {
                   onChange={handleChange}
                   multiline
                   rows={6}
-                  required
                 />
               </Grid>
 

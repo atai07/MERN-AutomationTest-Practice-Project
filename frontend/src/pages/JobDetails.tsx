@@ -311,7 +311,6 @@ const JobDetails: React.FC = () => {
                       name="firstName"
                       value={formData.firstName}
                       onChange={handleChange}
-                      required
                       placeholder="John"
                       InputProps={{
                         readOnly: !!user,
@@ -329,7 +328,6 @@ const JobDetails: React.FC = () => {
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleChange}
-                      required
                       placeholder="Doe"
                       InputProps={{
                         readOnly: !!user,
@@ -348,7 +346,6 @@ const JobDetails: React.FC = () => {
                       type="email"
                       value={formData.email}
                       onChange={handleChange}
-                      required
                       placeholder="john.doe@example.com"
                       InputProps={{
                         readOnly: !!user,
@@ -366,7 +363,6 @@ const JobDetails: React.FC = () => {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      required
                       placeholder="+1 234 567 8900"
                       InputProps={{
                         readOnly: !!user,
